@@ -1,0 +1,77 @@
+<!-- <div class="row">
+    <div class="col-md-6">
+        <form #f="ngForm" (ngSubmit)="saveup(f.value)" >
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input 
+                #title 
+                [(ngModel)]="product.title" name="title" 
+                id="title" type="text"
+                 class="form-control"
+                 required>
+                 <div class="alert alert-danger" 
+                 *ngIf="title.touched && title.invalid"
+                 >Title is required</div>
+            </div>
+            <label for="price">Price</label>
+            <div class="form-group input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input 
+                [(ngModel)]="product.price"
+                #price
+                name="price" 
+                id="price" 
+                type="number"
+                class="form-control"
+                 required>
+            </div>
+            <div class="alert alert-danger" 
+                 *ngIf="price.touched && price.invalid"
+                 >Price is required</div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select [(ngModel)]="product.category" name="category" id="category" class="form-control"
+                #category
+                required
+                >
+                    <option value=""></option>
+                    <option  *ngFor="let c of categories$ | async"  [value]="c.key">{{ c.value.name }}</option>
+                </select>
+                <div class="alert alert-danger"
+                *ngIf="category.touched && category.invalid"
+                > Category is required</div>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">IMAGE URL</label>
+                <input 
+                [(ngModel)]="product.imageUrl" name="imageUrl" 
+                id="imageUrl" type="text"
+                 class="form-control"
+                 required
+                 #imageUrl
+                 >
+                 <div class="alert alert-danger" 
+                 *ngIf="imageUrl.touched && imageUrl.invalid">
+                Image URL is required
+                </div>
+            </div>
+        
+            <button class="btn btn-primary">Save</button>
+            <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" [src]="product.imageUrl">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.title }}</h5>
+              <p class="card-text">{{ product.price | currency:'INR':true}}</p>
+            </div>
+          </div>
+    </div>
+</div> -->
+
+
+<h1>Hello India is the best</h1>

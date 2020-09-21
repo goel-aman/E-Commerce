@@ -1,0 +1,92 @@
+<p>
+    <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+</p>
+
+<p>
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search..">
+</p>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let x of filteredItem">
+                    <td>{{ x.title }}</td>
+                    <td>{{ x.price }}</td>
+                    <td>
+                        <a type="button" class="text-info" (click)="editItem($event,x)">Edit</a>&nbsp;
+                        <a type="button" class="text-info" *ngIf="editState && itemToEdit == x" (click)="clearState()">roll up</a>
+                        <div *ngIf="editState && itemToEdit == x">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form #f="ngForm" (ngSubmit)="updateItem(x)">
+                                        <div class="form-group">
+                                            <label for="title">Title</label>
+                                            <input #title [(ngModel)]="x.title" name="title" id="title"
+                                                type="text" class="form-control" required>
+                                            <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Title
+                                                is required</div>
+                                        </div>
+                                        <label for="price">Price</label>
+                                        <div class="form-group input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            <input [(ngModel)]="x.price" #price name="price" id="price"
+                                                type="number" class="form-control" required>
+                                        </div>
+                                        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">Price is
+                                            required</div>
+                                        <div class="form-group">
+                                            <label for="category">Category</label>
+                                            <select [(ngModel)]="x.category" name="category" id="category"
+                                                class="form-control" #category required>
+                                                <option value=""></option>
+                                                <option *ngFor="let c of categories | async" [value]="c.payload.key">
+                                                    {{ c.payload.val().name }}</option>
+                                            </select>
+                                            <div class="alert alert-danger"
+                                                *ngIf="category.touched && category.invalid"> Category is required</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="imageUrl">IMAGE URL</label>
+                                            <input [(ngModel)]="x.imageUrl" name="imageUrl" id="imageUrl"
+                                                type="text" class="form-control" required #imageUrl>
+                                            <div class="alert alert-danger"
+                                                *ngIf="imageUrl.touched && imageUrl.invalid">
+                                                Image URL is required
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" value="Save" class="btn btn-primary">&nbsp;&nbsp;
+                                        <button (click)="deleteItem($event,x)" type="button"  class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" style="width: 18rem;">
+                                        <img class="card-img-top" [src]="x.imageUrl">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ x.title }}</h5>
+                                            <p class="card-text">{{ x.price | currency:'INR':true}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+                    <!-- <td>
+                        <a [routerLink]="['/admin/products/update',x.key]">Edit</a>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

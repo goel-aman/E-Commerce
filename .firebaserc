@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "ecommosh",
+    "staging": "ecommosh"
+  },
+  "targets": {
+    "ecommosh": {
+      "hosting": {
+        "ecommosh": [
+          "ecommosh"
+        ]
+      }
+    }
+  }
+}

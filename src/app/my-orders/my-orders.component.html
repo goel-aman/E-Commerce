@@ -1,0 +1,48 @@
+<h1>My Orders</h1>
+
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <th>Customer</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders$ | async">
+                <td>{{ order.shipping.name }}</td>
+                <td>{{ order.datePlaced | date:'medium' }}</td>
+                <td>
+                    <a type="button" class="text-info"
+                        (click)="displaydata($event,order)">view</a>
+                    <a type="button" class="text-info" *ngIf="editState && order
+                        == ordertodisplay" (click)="clearState()"><span class="glyphicon glyphicon-eject">&nbsp; up</span></a>
+                    <div *ngIf="editState && ordertodisplay == order">
+                        <div class="row">
+                            <div class="col-5">
+                                <p>Address : {{ order.shipping.addressLine1 }} 
+                                    <br>
+                                    {{ order.shipping.addressLine2 }} <br>
+                                CITY: {{ order.shipping.city }} </p>
+                            </div>
+                            <div class="col-7">
+                                <ul class="list-group list-group-flush">
+                                    <li *ngFor="let x of generateitemarray(order)" class="list-group-item">
+                                        <p>Product :  {{ x.product.title }}</p>
+                                        <p>Category : {{ x.product.category }} &nbsp;&nbsp; Price: {{ x.product.price }} x {{ x.quantity }} = {{ x.product.price*x.quantity | currency:'INR':true }} </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a type="button" class="text-info"
+                        (click)="htmlToPdf(generateitemarray(order),order)">Invoice</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

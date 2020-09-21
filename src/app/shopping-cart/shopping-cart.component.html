@@ -1,0 +1,42 @@
+<h1>Shopping Cart</h1>
+<div class="row col-11">
+    <p>You have {{ shoppingCartItemCount }} items in your shopping cart
+        <button 
+        (click)="clearCart()"
+        class="btn btn-light btn-sm">Clear Shopping Cart</button>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th class="text-center" style="width: 230px;">Quantity</th>
+                <th class="text-right" style="width: 200px;">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <span> {{ rando() }} </span> -->
+            <tr *ngFor="let x of arr">
+                <td *ngIf="x.quantity > 0"> 
+                    <div [style.backgroundImage]="'url('+ x.product.imageUrl+')'" class="thumbnail" alt=""></div>
+                </td>
+                <td  *ngIf="x.quantity > 0">{{ x.product.title }}</td>
+                <td *ngIf="x.quantity > 0">
+                    <product-quantity class="abc" [product]="x.product" [shopping-cart]="cart"></product-quantity>
+                </td>
+                <td class="text-right" *ngIf="x.quantity > 0"> {{ x.product.price * x.quantity | currency:'INR':'symbol' }} </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{ totalpricex() | currency:'INR':'symbol' }} </th>
+        </tfoot>
+    </table>
+    <a 
+    *ngIf="shoppingCartItemCount" 
+    routerLink="/check-out"
+    class="btn btn-primary">Check Out</a>
+    
+</div>
